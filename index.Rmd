@@ -70,5 +70,35 @@ ggplot(df, aes(x = Pendapatan_per_kapita, y = Angka_Harapan_Hidup)) +
 ```
 
 
+```{r}
+library(ggplot2)
+ggplot(df, aes(x = Tahun, y = Negara, fill = Angka_Harapan_Hidup)) +
+  geom_tile() +
+  scale_fill_gradient(low = "blue", high = "red") +
+  labs(
+    title = "Heatmap Angka Harapan Hidup",
+    x = "Tahun",
+    y = "Negara",
+    fill = "Harapan Hidup"
+  ) +
+  theme_minimal()
+
+```
+
+
+```{r}
+# Scatter plot interaktif
+library(plotly)
+
+plot_ly(
+  df, x = ~Pendapatan_per_kapita, y = ~Angka_Harapan_Hidup,
+  type = "scatter", mode = "markers",
+  color = ~Benua, text = ~paste("Negara:", Negara)
+)
+
+```
+
+
+
 
 
