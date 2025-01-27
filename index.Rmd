@@ -151,27 +151,26 @@ Pastikan data bebas dari nilai-nilai yang hilang (missing values) untuk menghind
 
 ```{r}
 library(ggplot2)
-ggplot(df, aes(x = Tahun, y = Negara, fill = Angka_Harapan_Hidup)) +
+ggplot(df, aes(x = Tahun, y = Benua, fill = Angka_Harapan_Hidup)) +
   geom_tile() +
   scale_fill_gradient(low = "blue", high = "red") +
   labs(
     title = "Heatmap Angka Harapan Hidup",
     x = "Tahun",
-    y = "Negara",
+    y = "Benua",
     fill = "Harapan Hidup"
   ) +
   theme_minimal()
 
 ```
-
 ## Interpretasi
-Grafik ini menunjukkan hubungan antara pendapatan per kapita (sumbu X) dan angka harapan hidup (sumbu Y).
+Heatmap ini menggambarkan angka harapan hidup (warna dari biru ke merah) untuk berbagai negara (sumbu Y) sepanjang waktu (sumbu X).
 
-**Pola umum:** Ada tren bahwa dengan meningkatnya pendapatan per kapita, angka harapan hidup cenderung meningkat, terutama pada pendapatan rendah hingga sedang.
+**Warna biru:** Menunjukkan angka harapan hidup yang sangat rendah, umumnya terlihat pada tahun-tahun awal (1800-an).
 
-**Fenomena saturasi:** Setelah pendapatan per kapita mencapai angka tertentu (sekitar 50.000 ke atas), peningkatan pendapatan tidak terlalu berpengaruh terhadap angka harapan hidup, yang cenderung mendatar di kisaran 70-80 tahun.
+**Warna merah:** Menunjukkan angka harapan hidup tinggi, terutama terlihat pada era modern (setelah 1950-an), menunjukkan adanya peningkatan signifikan dalam kualitas hidup di banyak negara.
 
-**Penyebaran data:** Pada pendapatan sangat rendah, terdapat variasi angka harapan hidup yang signifikan (terlihat data yang tersebar vertikal di dekat nol pada sumbu X).
+**Variasi antar negara:** Beberapa negara memiliki angka harapan hidup yang lebih tinggi lebih awal dibandingkan negara lain, menunjukkan adanya kesenjangan perkembangan sosial dan ekonomi.
 
 
 # Grafik interaktif dengan plotly
@@ -212,14 +211,12 @@ plot_ly(
 ```
 
 ## Interpretasi
-Heatmap ini menggambarkan angka harapan hidup (warna dari biru ke merah) untuk berbagai negara (sumbu Y) sepanjang waktu (sumbu X).
+Grafik ini menunjukkan hubungan antara pendapatan per kapita (sumbu X) dan angka harapan hidup (sumbu Y).
 
-**Warna biru:** Menunjukkan angka harapan hidup yang sangat rendah, umumnya terlihat pada tahun-tahun awal (1800-an).
+**Pola umum:** Ada tren bahwa dengan meningkatnya pendapatan per kapita, angka harapan hidup cenderung meningkat, terutama pada pendapatan rendah hingga sedang.
 
-**Warna merah:** Menunjukkan angka harapan hidup tinggi, terutama terlihat pada era modern (setelah 1950-an), menunjukkan adanya peningkatan signifikan dalam kualitas hidup di banyak negara.
+**Fenomena saturasi:** Setelah pendapatan per kapita mencapai angka tertentu (sekitar 50.000 ke atas), peningkatan pendapatan tidak terlalu berpengaruh terhadap angka harapan hidup, yang cenderung mendatar di kisaran 70-80 tahun.
 
-**Variasi antar negara:** Beberapa negara memiliki angka harapan hidup yang lebih tinggi lebih awal dibandingkan negara lain, menunjukkan adanya kesenjangan perkembangan sosial dan ekonomi.
-
-
+**Penyebaran data:** Pada pendapatan sangat rendah, terdapat variasi angka harapan hidup yang signifikan (terlihat data yang tersebar vertikal di dekat nol pada sumbu X).
 
 
