@@ -23,28 +23,34 @@ text-align: justify}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
-# Deskripsi
-
-**Nama Mahasiswa:** Nama Lengkap Anda  
-**NIM:** Nomor Induk Mahasiswa Anda  
+**Nama :** Hafiz Nursyafiq  
+**NIM  :** A3202300028   
 
 **Tujuan Analisis:**
 Dokumen ini bertujuan untuk mengeksplorasi dan menganalisis data melalui visualisasi, guna mendapatkan wawasan yang dapat mendukung pengambilan keputusan.
 
 ---
+
+# Grafik Univariat dengan Histogram 
+
+Histogram ini dibuat untuk menggambarkan distribusi angka harapan hidup dari data yang tersedia. Grafik ini menunjukkan berapa banyak negara yang berada dalam rentang tertentu dari angka harapan hidup.
+
+## tahapan penyusuan grafik
+
+### Persiapan Dataset: 
+Dataset dibaca menggunakan fungsi read_excel dari library readxl.
+### Membuat Grafik: 
+Menggunakan fungsi ggplot dari library ggplot2 untuk membuat histogram.
+### Penambahan Elemen Grafis:
+**geom_histogram():** Membuat histogram dengan bin lebar 5.
+**labs():** Menambahkan judul dan label pada sumbu X dan Y.
+**theme_minimal():** Memberikan tampilan minimalis pada grafik.
+
+
 ```{r}
-# Load library
 library(ggplot2)
 library(readxl)
-
-# Baca dataset
 df <- read_excel("Data.xlsx")
-
-# Periksa nama kolom
-colnames(df)
-
-# Plot histogram
 ggplot(df, aes(x = Angka_Harapan_Hidup)) +
   geom_histogram(binwidth = 5, fill = "skyblue", color = "black") +
   labs(
@@ -53,8 +59,42 @@ ggplot(df, aes(x = Angka_Harapan_Hidup)) +
     y = "Frekuensi"
   ) +
   theme_minimal()
-
 ```
+
+## Interpretasi
+
+Grafik ini menunjukkan distribusi frekuensi angka harapan hidup pada data yang dimiliki.
+
+Sebagian besar data terpusat pada rentang 20 hingga 50 tahun, dengan puncak frekuensi berada di kisaran 25 hingga 30 tahun.
+
+Distribusi ini terlihat tidak merata dan mencerminkan bahwa angka harapan hidup di dataset ini cenderung rendah. Namun, terdapat beberapa angka harapan hidup yang mencapai nilai tinggi (di atas 75 tahun), walaupun frekuensinya lebih kecil.
+
+Distribusi tersebut cenderung mencerminkan kesenjangan atau ketimpangan kondisi kehidupan pada populasi yang dianalisis.
+
+
+
+
+# Grafik Bivariat dengan Scatter Plot
+
+Scatter plot ini dibuat untuk menggambarkan hubungan antara pendapatan per kapita dan angka harapan hidup dari data yang tersedia. Grafik ini menunjukkan bagaimana pendapatan per kapita suatu negara berhubungan dengan angka harapan hidupnya, dengan setiap titik mewakili satu negara.
+
+## Tahapan penyusunan grafik
+
+### Persiapan Dataset:
+Dataset dibaca menggunakan fungsi read_excel dari library readxl dan disimpan dalam variabel df.
+
+Data yang digunakan mencakup dua variabel utama: Pendapatan_per_kapita dan Angka_Harapan_Hidup.
+
+### Membuat grafik
+Menggunakan fungsi ggplot dari library ggplot2 untuk membuat scatter plot.
+
+Sumbu X digunakan untuk variabel Pendapatan_per_kapita, sementara sumbu Y untuk variabel Angka_Harapan_Hidup.
+
+### Penambahan elemen grafis
+**geom_point():** Menampilkan titik-titik data dengan warna biru dan tingkat transparansi 0.7.
+**labs():** Menambahkan judul dan label pada sumbu X dan Y agar lebih informatif.
+**theme_minimal():** Memberikan tampilan minimalis pada grafik untuk meningkatkan keterbacaan.
+
 
 ```{r}
 # Scatter plot
@@ -68,6 +108,45 @@ ggplot(df, aes(x = Pendapatan_per_kapita, y = Angka_Harapan_Hidup)) +
   theme_minimal()
 
 ```
+
+## Interpretasi
+Grafik ini menunjukkan korelasi antara pendapatan per kapita dengan angka harapan hidup.
+
+Secara umum, terlihat bahwa ketika pendapatan per kapita meningkat, angka harapan hidup cenderung juga meningkat, meskipun tidak linear.
+
+Pada pendapatan rendah (di bawah 50.000), terdapat variabilitas yang tinggi pada angka harapan hidup, mulai dari yang sangat rendah hingga tinggi. Namun, pada pendapatan yang lebih tinggi (di atas 100.000), angka harapan hidup cenderung stabil di atas 75 tahun.
+
+Grafik ini mengindikasikan hubungan positif antara kesejahteraan ekonomi dan kualitas hidup. Namun, terdapat outlier di mana pendapatan rendah tetap memiliki angka harapan hidup tinggi, yang mungkin dipengaruhi oleh faktor selain ekonomi (misalnya akses kesehatan, kebijakan pemerintah, atau faktor lingkungan).
+
+
+
+# Grafik multivariat dengan heatmap
+Heatmap ini menggambarkan perkembangan angka harapan hidup berdasarkan tahun dan negara. Warna pada heatmap mewakili angka harapan hidup, dengan gradasi dari biru (angka harapan hidup rendah) ke merah (angka harapan hidup tinggi). Grafik ini memungkinkan kita untuk memahami pola temporal dan spasial dalam perkembangan angka harapan hidup di berbagai negara.
+
+## Tahap penyusunan grafik
+
+### Persiapan Dataset:
+
+Dataset dipersiapkan dengan memuat data menggunakan fungsi seperti read_excel dari library readxl atau fungsi lain sesuai format data yang tersedia.
+
+Pastikan dataset memiliki kolom Tahun, Negara, dan Angka_Harapan_Hidup.
+
+### Membuat Grafik:
+
+Gunakan fungsi ggplot dari library ggplot2 untuk menginisialisasi visualisasi.
+
+### Penambahan Elemen Grafis:
+
+**geom_tile():** Membuat elemen heatmap menggunakan data dari sumbu X (Tahun), Y (Negara), dan warna yang mewakili variabel Angka_Harapan_Hidup.
+**scale_fill_gradient():** Menentukan gradasi warna dari "blue" (angka harapan hidup rendah) hingga "red" (angka harapan hidup tinggi).
+**labs():** Menambahkan judul grafik, label pada sumbu X dan Y, serta legenda untuk gradasi warna.
+**theme_minimal():** Memberikan tampilan grafik yang sederhana dan bersih.
+
+### Penyempurnaan Grafik:
+
+Pastikan nama kolom data sesuai dengan yang digunakan dalam skrip (Tahun, Negara, Angka_Harapan_Hidup).
+
+Pastikan data bebas dari nilai-nilai yang hilang (missing values) untuk menghindari visualisasi yang tidak lengkap.
 
 
 ```{r}
@@ -85,19 +164,61 @@ ggplot(df, aes(x = Tahun, y = Negara, fill = Angka_Harapan_Hidup)) +
 
 ```
 
+## Interpretasi
+Grafik ini menunjukkan hubungan antara pendapatan per kapita (sumbu X) dan angka harapan hidup (sumbu Y).
+
+**Pola umum:** Ada tren bahwa dengan meningkatnya pendapatan per kapita, angka harapan hidup cenderung meningkat, terutama pada pendapatan rendah hingga sedang.
+
+**Fenomena saturasi:** Setelah pendapatan per kapita mencapai angka tertentu (sekitar 50.000 ke atas), peningkatan pendapatan tidak terlalu berpengaruh terhadap angka harapan hidup, yang cenderung mendatar di kisaran 70-80 tahun.
+
+**Penyebaran data:** Pada pendapatan sangat rendah, terdapat variasi angka harapan hidup yang signifikan (terlihat data yang tersebar vertikal di dekat nol pada sumbu X).
+
+
+# Grafik interaktif dengan plotly
+Scatter plot interaktif ini dibuat menggunakan Plotly untuk menggambarkan hubungan antara Pendapatan per Kapita dan Angka Harapan Hidup. Grafik ini memungkinkan pengguna untuk melakukan interaksi seperti zoom, pan, dan melihat informasi tambahan saat mengarahkan kursor ke titik data.
+
+## Tahapan Penyusunan Grafik
+
+**1. Persiapan Dataset:**
+Dataset dalam bentuk data frame df harus berisi kolom berikut:
+
+Pendapatan_per_kapita → Variabel di sumbu X.
+Angka_Harapan_Hidup → Variabel di sumbu Y.
+Benua → Untuk membedakan warna setiap wilayah geografis.
+Negara → Untuk menampilkan informasi tambahan saat hover.
+
+**2. Membuat Grafik:**
+Menggunakan fungsi plot_ly dari library plotly untuk membuat scatter plot yang menampilkan hubungan antar variabel dengan fitur interaktif.
+
+**3. Penambahan Elemen Grafis:**
+type = "scatter" → Menentukan jenis grafik sebagai scatter plot.
+mode = "markers" → Menampilkan titik-titik data sebagai simbol.
+color = ~Benua → Memberikan warna berbeda berdasarkan benua.
+text = ~paste("Negara:", Negara) → Menampilkan nama negara saat kursor diarahkan ke titik data.
 
 ```{r}
-# Scatter plot interaktif
-library(plotly)
+suppressPackageStartupMessages(library(plotly))
 
 plot_ly(
-  df, x = ~Pendapatan_per_kapita, y = ~Angka_Harapan_Hidup,
-  type = "scatter", mode = "markers",
-  color = ~Benua, text = ~paste("Negara:", Negara)
+  df, 
+  x = ~Pendapatan_per_kapita, 
+  y = ~Angka_Harapan_Hidup, 
+  type = "scatter", 
+  mode = "markers", 
+  color = ~Benua, 
+  text = ~paste("Negara:", Negara)
 )
 
 ```
 
+## Interpretasi
+Heatmap ini menggambarkan angka harapan hidup (warna dari biru ke merah) untuk berbagai negara (sumbu Y) sepanjang waktu (sumbu X).
+
+**Warna biru:** Menunjukkan angka harapan hidup yang sangat rendah, umumnya terlihat pada tahun-tahun awal (1800-an).
+
+**Warna merah:** Menunjukkan angka harapan hidup tinggi, terutama terlihat pada era modern (setelah 1950-an), menunjukkan adanya peningkatan signifikan dalam kualitas hidup di banyak negara.
+
+**Variasi antar negara:** Beberapa negara memiliki angka harapan hidup yang lebih tinggi lebih awal dibandingkan negara lain, menunjukkan adanya kesenjangan perkembangan sosial dan ekonomi.
 
 
 
